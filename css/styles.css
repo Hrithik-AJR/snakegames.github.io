@@ -4,26 +4,54 @@
 }
 
 .body{
-    background: url(../image/bg.jpg);
+    background-color: green;
     min-height: 100vh;
-    background-size: 100vw 100vh;
+    background-image: url('../image/snakebg.png');
+    width:100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#scoreBox{
+
+.fit{
+    width: 100px;
+    height: 100px;
+    border-radius:25px ;
     position: absolute;
     top:9px;
-    right:200px;
+    right:220px;
+   
+}
+#scoreBox{
+    position: absolute;
+    color: white;
+    font-family: 'Gorditas', cursive;
+    text-shadow: 1px 1px 3px black;
+    top:120px;
+    right:190px;
     font-size:39px;
     font-weight: bold;
 }
 
+#highscoreBox{
+    position: absolute;
+    color: yellow;
+    text-shadow: 2px 2px 4px black;
+    font-family: 'Gorditas', cursive;
+    top:166px;
+    right:138px;
+    font-size:39px;
+    font-weight: bold;
+}
 #board{
-    background: linear-gradient(rgb(184, 245, 184),rgb(248, 248, 173));
+    background: linear-gradient(rgb(245, 184, 184),rgb(186, 248, 173));
     height: 92vmin;
     width: 90vmin;
+    position: absolute;
     border: 2px solid black;
     display: grid;
     grid-template-rows: repeat(18,1fr);
@@ -31,16 +59,19 @@
 }
 
 .head{
-    background-color: red;
+    background-color: rgb(0, 47, 255);
     border-radius: 15px;
+    outline: 2px solid;
 }
 
 .snake{
-    background-color: purple;
+    background-color: rgb(48, 193, 12);
     border-radius: 10px;
+    outline: 3px inset;
 }
 
 .food{
-    background-color: rgb(169, 32, 187);
-    border-radius: 10px;
+    background-color: rgb(249, 64, 64);
+    outline: 2px groove;
+    border-radius: 20px;
 }

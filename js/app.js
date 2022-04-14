@@ -11,15 +11,13 @@ let snakeArr = [
 ]
 
 food= {x:6, y:7};
-//Game function
-function imp(gtime){
+function imp(time){
     window.requestAnimationFrame(imp);
-    //console.log(gtime);
-    if((gtime-lastPaintTime)/1000 < 1/speed)
+    if((time-lastPaintTime)/1000 < 1/speed)
     {
         return;
     }
-    lastPaintTime = gtime;
+    lastPaintTime = time;
     gameEngine();
 }
 function collide(snake){
@@ -34,22 +32,28 @@ function collide(snake){
 }
 
 function  gameEngine(){
-//update the game
+//collision
     if(collide(snakeArr)){
         gameoversound.play();
         musicsound.pause();
         inputDir={x:0,y:0};
-        alert("Game Over. Press any key to play again!!");
+        alert("Game Over !!");
         snakeArr=[{x:13,y:15}];
         musicsound.play();
         score=0;
     }
 
-    //Move on increment
+    //Move on
     if(snakeArr[0].y===food.y && snakeArr[0].x === food.x){
         foodsound.play();
         score+=1;
-        scoreBox.innerHTML= "Score: " + score;
+        if(score>highscorevar)
+        {
+            highscorevar=score;
+            localStorage.setItem("highscor",JSON.stringify(highscorevar));
+            highscoreBox.innerHTML="High Score: " + highscorevar;
+        }
+        scoreBox.innerHTML="Score: " + score ;
         snakeArr.unshift({x:snakeArr[0].x + inputDir.x, y:snakeArr[0].y + inputDir.y});
         let a=2;
         let b=16;
@@ -86,13 +90,21 @@ function  gameEngine(){
         board.appendChild(foodElement);
 }
 
-
+let highscor=localStorage.getItem("highscor");
+if(highscor==null){
+    highscorevar=0;
+    localStorage.setItem("highscor",JSON.stringify(highscorevar));
+}
+else{
+    highscorevar=JSON.parse(highscor);
+    highscoreBox.innerHTML="High Score: " + highscor;
+}
 
 window.requestAnimationFrame(imp);
-window.addEventListener('keydown', e=>{
+window.addEventListener('keydown', game=>{
     inputDir = {x:0,y:1}
     movesound.play();
-    switch (e.key) {
+    switch (game.key) {
         case "ArrowUp":
             inputDir.x =0;
             inputDir.y =-1;
